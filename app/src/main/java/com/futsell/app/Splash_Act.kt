@@ -1,7 +1,10 @@
 package com.futsell.app
 
+import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import android.os.Handler
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.startActivity
 
 class Splash_Act: AppCompatActivity() {
 
@@ -11,5 +14,11 @@ class Splash_Act: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.splash_act)
 
+        Handler().postDelayed({
+
+            startActivity(Intent(this@Splash_Act, MainActivity::class.java))
+
+            finish()
+        }, SPLASH_TIME_OUT)
     }
-}
+    }
