@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "726774891555",
+    "firebase_url": "https://futsell-9ce6c.firebaseio.com",
+    "project_id": "futsell-9ce6c",
+    "storage_bucket": "futsell-9ce6c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:726774891555:android:6561552d619474bf",
+        "android_client_info": {
+          "package_name": "com.futsell.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "726774891555-h09l32urq5uiplp04gaaa1p1j414kpib.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.futsell.app",
+            "certificate_hash": "4bd1b964a2e22deba6b55a6229cca21a3ff3adf4"
+          }
+        },
+        {
+          "client_id": "726774891555-5jb98ek8jefs2o133ltegguv90jf3gfj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTcc4jfF-OAcN_ozP1YNtI0CCqp_lTsrk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "726774891555-5jb98ek8jefs2o133ltegguv90jf3gfj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
