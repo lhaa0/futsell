@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        android:id="@+id/layItem"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?android:attr/selectableItemBackground">
+
+    <TextView
+            android:id="@+id/nameFutsal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="01. Futsal One"
+            android:layout_margin="15dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textStyle="bold"/>
+
+    <TextView
+            android:id="@+id/addressFutsal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Jl. Kedoya Utara no 13 kav 27 A"
+            android:layout_marginStart="15dp"/>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorPrimaryDark"
+            android:layout_marginTop="10dp"/>
+
+</LinearLayout>
