@@ -30,6 +30,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.CameraUpdate
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.maps.android.ui.IconGenerator
 import com.livinglifetechway.quickpermissions_kotlin.runWithPermissions
 import retrofit2.Call
 import retrofit2.Callback
@@ -99,24 +100,26 @@ class MainActivity : FragmentActivity(), OnMapReadyCallback, LocationListener, M
         apiInterface.tb_futsal().enqueue(object : Callback<ArrayList<ModelFutsal>> {
             override fun onResponse(call: Call<ArrayList<ModelFutsal>>, response: Response<ArrayList<ModelFutsal>>) {
                 if (response.code() == 200) {
+                    val iconFactory = IconGenerator(this@MainActivity)
 //                    rcMain.adapter = MainAdapter(response.body()!!, this@MainActivity)
                     val futsals = ArrayList<ModelFutsal>()
+                    var no = 0
                     for (point in response.body()!!) {
                         val target = Location("target");
                         target.latitude = point.latitude.toDouble()
                         target.longitude = point.longitude.toDouble()
-                        var no = 0
                         if (location!!.distanceTo(target) < 5000) {
-
-                                    no++
-                                    futsals.add(point)
-                                    val marker = LatLng(point.latitude.toDouble(), point.longitude.toDouble())
-                                    gMap.addMarker(
-                                        MarkerOptions()
-                                            .position(marker)
-                                            .title(point.nama_futsal)
-                                    )
-                                }
+                            no++
+                            futsals.add(point)
+                            val marker = LatLng(point.latitude.toDouble(), point.longitude.toDouble())
+                            gMap.addMarker(
+                                MarkerOptions()
+                                    .icon(BitmapDescriptorFactory.fromBitmap(iconFactory
+                                        .makeIcon("$no")))
+                                    .position(marker)
+                                    .title(point.nama_futsal)
+                            )
+                        }
 
 
                     }
