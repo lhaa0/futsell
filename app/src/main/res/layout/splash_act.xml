@@ -6,8 +6,8 @@
               android:layout_height="match_parent"
               android:background="@color/colorAccent">
     <ImageView
-            android:layout_width="213dp"
-            android:layout_height="309dp"
+            android:layout_width="202dp"
+            android:layout_height="285dp"
             android:layout_margin="50dp"
             android:src="@drawable/ic_launcher_foregroundd"/>
 
