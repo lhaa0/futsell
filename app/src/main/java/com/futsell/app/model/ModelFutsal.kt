@@ -9,8 +9,8 @@ data class ModelFutsal(
     @SerializedName("alamat_futsal") var alamat_futsal : String,
     @SerializedName("latitude") var latitude : String,
     @SerializedName("longitude") var longitude : String,
-    @SerializedName("open_at") var open_at : String,
-    @SerializedName("close_at") var close_at : String,
+    @SerializedName("open_at") var open_at : Int,
+    @SerializedName("close_at") var close_at : Int,
     @SerializedName("rating") var rating : Int,
     @SerializedName("uid_admin") var uid_admin : String
 ) : Serializable

@@ -3,6 +3,7 @@ package com.futsell.app
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.graphics.*
 import android.graphics.drawable.Drawable
 import android.location.Location
@@ -16,6 +17,7 @@ import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.futsell.app.activity.OrderActivity
 import com.futsell.app.adapter.MainAdapter
 import com.futsell.app.model.ModelFutsal
 import com.futsell.app.util.ApiClient
@@ -41,7 +43,6 @@ import java.lang.Exception
 class MainActivity : FragmentActivity(), OnMapReadyCallback, LocationListener, MainAdapter.onItemClickListener {
 
     lateinit var gMap: GoogleMap
-    lateinit var mapFragment: SupportMapFragment
     private var locationManager: LocationManager? = null
     private val MIN_TIME: Long = 400
     private val MIN_DISTANCE = 1000f
@@ -92,7 +93,9 @@ class MainActivity : FragmentActivity(), OnMapReadyCallback, LocationListener, M
     }
 
     override fun onClick(futsal: ModelFutsal) {
-
+        val intent = Intent(this, OrderActivity::class.java)
+        intent.putExtra("data", futsal)
+        startActivity(intent)
     }
 
     fun getData(location: Location?) {

@@ -1,4 +1,4 @@
-package com.futsell.app
+package com.futsell.app.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.util.Log
 import android.util.Log.d
 import android.widget.Toast
+import com.futsell.app.MainActivity
+import com.futsell.app.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -15,7 +17,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_main.*
 
 class LoginActivity : AppCompatActivity() {
 

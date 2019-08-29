@@ -12,7 +12,7 @@ class ApiClient {
     fun getClient() : Retrofit {
         if (retrofit == null) {
             retrofit = Retrofit.Builder()
-                .baseUrl("http://192.168.42.162:45455/api/")
+                .baseUrl("http://192.168.42.237:45455/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
         }
