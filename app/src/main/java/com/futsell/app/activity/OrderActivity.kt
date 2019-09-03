@@ -6,20 +6,25 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.futsell.app.R
 import com.futsell.app.adapter.OrderAdapter
 import com.futsell.app.model.ModelClock
 import com.futsell.app.model.ModelFutsal
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_order.*
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 class OrderActivity : AppCompatActivity() {
 
     val clocks = ArrayList<ModelClock>()
     var date = Calendar.getInstance().time
+    lateinit var data : ModelFutsal
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +32,7 @@ class OrderActivity : AppCompatActivity() {
 
         rcOrder.layoutManager = LinearLayoutManager(this)
 
-        val data = intent.getSerializableExtra("data") as ModelFutsal
+        data = intent.getSerializableExtra("data") as ModelFutsal
 
         title = data.nama_futsal
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
@@ -56,7 +61,7 @@ class OrderActivity : AppCompatActivity() {
 
 
 
-        for (i in data.open_at .. data.close_at) {
+        for (i in data.open_at!! .. data.close_at!!) {
             clocks.add(ModelClock(i, false))
         }
 
@@ -73,7 +78,36 @@ class OrderActivity : AppCompatActivity() {
             android.R.id.home -> {
                 finish()
             }
+            R.id.goOrder -> {
+                val dialog = AlertDialog.Builder(this)
+                    .setTitle("Go Order!!!")
+                    .setMessage("Mau cari musuh juga?")
+                    .setNegativeButton("Tidak") { dialog, i ->
+                        goOrder(false)
+                    }
+                    .setPositiveButton("Sparing") { dialog, i->
+                        goOrder(true)
+                    }
+                    .setNeutralButton("Batal") { dialog, which ->
+
+                    }
+                dialog.create().show()
+            }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    fun goOrder(spar : Boolean){
+        val jam = ArrayList<Int>()
+        for (j in clocks){
+            if (j.checked)
+                jam.add(j.clock)
+        }
+        val fAuth = FirebaseAuth.getInstance()
+        val dbRef = FirebaseDatabase.getInstance().getReference("dataOrder/${fAuth.currentUser!!.uid}|${data.uid_admin}")
+        dbRef.child("sparing").setValue(spar)
+        dbRef.child("jam").setValue(jam)
+        dbRef.child("tanggal").setValue(txtTgl.text.toString())
+        dbRef.push()
     }
 }
