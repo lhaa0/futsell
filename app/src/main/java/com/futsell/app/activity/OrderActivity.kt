@@ -13,7 +13,10 @@ import com.futsell.app.adapter.OrderAdapter
 import com.futsell.app.model.ModelClock
 import com.futsell.app.model.ModelFutsal
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_order.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -104,10 +107,26 @@ class OrderActivity : AppCompatActivity() {
                 jam.add(j.clock)
         }
         val fAuth = FirebaseAuth.getInstance()
-        val dbRef = FirebaseDatabase.getInstance().getReference("dataOrder/${fAuth.currentUser!!.uid}|${data.uid_admin}")
-        dbRef.child("sparing").setValue(spar)
-        dbRef.child("jam").setValue(jam)
-        dbRef.child("tanggal").setValue(txtTgl.text.toString())
-        dbRef.push()
+//        val dbRef = FirebaseDatabase.getInstance().getReference("dataOrder/${fAuth.currentUser!!.uid}|${data.uid_admin}")
+        val dbRef = FirebaseDatabase.getInstance().getReference("dataOrder")
+            .addListenerForSingleValueEvent(object : ValueEventListener{
+                override fun onDataChange(p0: DataSnapshot) {
+                    var key = 1
+                    if (p0.exists()){
+                        p0.children.indexOfLast {
+                            key = it.key!!.toInt() + 1
+                            true
+                        }
+                    }
+
+
+                }
+
+                override fun onCancelled(p0: DatabaseError) {
+                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                }
+
+
+            })
     }
 }
