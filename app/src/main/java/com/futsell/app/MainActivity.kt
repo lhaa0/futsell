@@ -9,6 +9,7 @@ import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log.e
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.futsell.app.activity.OrderActivity
@@ -40,6 +41,12 @@ class MainActivity : FragmentActivity(), OnMapReadyCallback, LocationListener,
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+//        val sToolbar = (applicationContext as AppCompatActivity)
+//        sToolbar.setSupportActionBar(toolbar)
+//        sToolbar.supportActionBar!!.setDisplayShowHomeEnabled(true)
+//        sToolbar.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+//        sToolbar.supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_person_24dp)
 
         rcMain.layoutManager = LinearLayoutManager(this)
 

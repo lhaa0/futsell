@@ -8,6 +8,8 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.futsell.app.ChatDetailsActivity
+import com.futsell.app.Friend
 import com.futsell.app.R
 import com.futsell.app.adapter.OrderAdapter
 import com.futsell.app.model.ModelClock
@@ -108,7 +110,7 @@ class OrderActivity : AppCompatActivity() {
         }
         val fAuth = FirebaseAuth.getInstance()
 //        val dbRef = FirebaseDatabase.getInstance().getReference("dataOrder/${fAuth.currentUser!!.uid}|${data.uid_admin}")
-        val dbRef = FirebaseDatabase.getInstance().getReference("dataOrder")
+        val dbRef = FirebaseDatabase.getInstance().getReference("dataOrder/${fAuth.currentUser!!.uid}|${data.id_futsal}/")
             .addListenerForSingleValueEvent(object : ValueEventListener{
                 override fun onDataChange(p0: DataSnapshot) {
                     var key = 1
@@ -118,14 +120,22 @@ class OrderActivity : AppCompatActivity() {
                             true
                         }
                     }
+                    val insert = FirebaseDatabase.getInstance().getReference("dataOrder/${fAuth.currentUser!!.uid}|${data.id_futsal}/$key")
+                    insert.child("sparing").setValue(spar)
+                    insert.child("jam").setValue(jam)
+                    insert.child("tanggal").setValue(txtTgl.text.toString())
+                    insert.child("idAdmin").setValue(data.uid_admin)
+                    insert.push()
 
-
+                    ChatDetailsActivity.navigate(this@OrderActivity, findViewById(R.id.rcOrder),
+                        Friend(data.uid_admin.toString(), data.nama_futsal.toString() , "hhhhh")
+                    )
+                    finish()
                 }
 
                 override fun onCancelled(p0: DatabaseError) {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-                }
 
+                }
 
             })
     }

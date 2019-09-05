@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">futsell</string>
+
+    <string name="settings_file_name">com.futsell.app</string>
+    <string name="error_authetication_failed">Authentication failed.</string>
+    <string name="error_could_not_connect">Could not connect</string>
+    <string name="error_login_failed">Login failed</string>
 </resources>
