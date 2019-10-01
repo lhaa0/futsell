@@ -1,8 +1,9 @@
-package com.futsell.app
+package com.futsell.app.util
 
 import android.content.Context
 import android.content.SharedPreferences
-import java.util.ArrayList
+import com.futsell.app.R
+import java.util.*
 
 class SettingApi {
     internal var mContext: Context

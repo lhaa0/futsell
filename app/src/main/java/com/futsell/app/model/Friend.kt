@@ -1,4 +1,4 @@
-package com.futsell.app
+package com.futsell.app.model
 
 import java.io.Serializable
 

@@ -1,4 +1,4 @@
-package com.futsell.app
+package com.futsell.app.util
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -11,6 +11,8 @@ import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
+import com.futsell.app.MainActivity
+import com.futsell.app.R
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -22,7 +24,8 @@ import com.google.firebase.database.ValueEventListener
 class NotificationService : JobService() {
     override fun onStartJob(params: JobParameters?): Boolean {
         val ref = FirebaseDatabase.getInstance().getReference(Const.MESSAGE_CHILD)
-        val parseFirebaseData: ParseFirebaseData = ParseFirebaseData(this)
+        val parseFirebaseData: ParseFirebaseData =
+            ParseFirebaseData(this)
         ref.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(p0: DataSnapshot) {
                 Log.d(Const.LOG_TAG, "Data changed from service")

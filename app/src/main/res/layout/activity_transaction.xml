@@ -20,6 +20,6 @@
             android:layout_alignParentBottom="true"
             app:useCompatPadding="true"
             android:clickable="true"
-            app:srcCompat="@android:drawable/ic_input_add" />
+            app:srcCompat="@drawable/ic_add_24dp" />
 
 </RelativeLayout>

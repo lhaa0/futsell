@@ -1,9 +1,10 @@
-package com.futsell.app
+package com.futsell.app.util
 
 import android.app.Activity
 import android.os.Build
 import android.view.WindowManager
 import androidx.annotation.RequiresApi
+import com.futsell.app.R
 import java.text.SimpleDateFormat
 import java.util.*
 

@@ -1,4 +1,4 @@
-package com.futsell.app
+package com.futsell.app.adapter
 
 import android.content.Context
 import android.util.SparseBooleanArray
@@ -8,12 +8,16 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
+import com.futsell.app.R
+import com.futsell.app.util.ChatMessage
+import com.futsell.app.util.CircleTransform
+import com.futsell.app.util.SettingApi
 import com.squareup.picasso.Picasso
-import java.util.ArrayList
+import java.util.*
 
 class ChatListAdapter(private val mContext: Context, items: ArrayList<ChatMessage>, val uid : String) : RecyclerView.Adapter<ChatListAdapter.ViewHolder>(),
     Filterable {
-    override fun onBindViewHolder(holder: ChatListAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         set = SettingApi(mContext)
         val c = filtered_items[position]
         if (filtered_items[position].receiver.id == uid && (filtered_items[position].isRead == false))
@@ -117,7 +121,7 @@ class ChatListAdapter(private val mContext: Context, items: ArrayList<ChatMessag
         selectedItems = SparseBooleanArray()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatListAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         // create a new view
         val v = LayoutInflater.from(parent.context).inflate(R.layout.row_chats, parent, false)
         // set the view's size, margins, paddings and layout parameters
@@ -132,7 +136,9 @@ class ChatListAdapter(private val mContext: Context, items: ArrayList<ChatMessag
     private fun setAnimation(viewToAnimate: View, position: Int) {
         // If the bound view wasn't previously displayed on screen, it's animated
         if (position > lastPosition) {
-            val animation = AnimationUtils.loadAnimation(mContext, R.anim.slide_in_bottom)
+            val animation = AnimationUtils.loadAnimation(mContext,
+                R.anim.slide_in_bottom
+            )
             viewToAnimate.startAnimation(animation)
             lastPosition = position
         }

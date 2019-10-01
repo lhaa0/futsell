@@ -1,4 +1,4 @@
-package com.futsell.app
+package com.futsell.app.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -13,23 +13,25 @@ import android.widget.EditText
 import android.widget.ListView
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.ViewCompat
-import com.futsell.app.Const.Companion.NODE_IS_READ
-import com.futsell.app.Const.Companion.NODE_RECEIVER_ID
-import com.futsell.app.Const.Companion.NODE_RECEIVER_NAME
-import com.futsell.app.Const.Companion.NODE_RECEIVER_PHOTO
-import com.futsell.app.Const.Companion.NODE_SENDER_ID
-import com.futsell.app.Const.Companion.NODE_SENDER_NAME
-import com.futsell.app.Const.Companion.NODE_SENDER_PHOTO
-import com.futsell.app.Const.Companion.NODE_TEXT
-import com.futsell.app.Const.Companion.NODE_TIMESTAMP
+import com.futsell.app.R
+import com.futsell.app.adapter.ChatDetailListAdapter
+import com.futsell.app.model.Friend
+import com.futsell.app.util.*
+import com.futsell.app.util.Const.Companion.NODE_IS_READ
+import com.futsell.app.util.Const.Companion.NODE_RECEIVER_ID
+import com.futsell.app.util.Const.Companion.NODE_RECEIVER_NAME
+import com.futsell.app.util.Const.Companion.NODE_RECEIVER_PHOTO
+import com.futsell.app.util.Const.Companion.NODE_SENDER_ID
+import com.futsell.app.util.Const.Companion.NODE_SENDER_NAME
+import com.futsell.app.util.Const.Companion.NODE_SENDER_PHOTO
+import com.futsell.app.util.Const.Companion.NODE_TEXT
+import com.futsell.app.util.Const.Companion.NODE_TIMESTAMP
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import java.util.ArrayList
-import java.util.HashMap
+import java.util.*
 
 class ChatDetailsActivity : AppCompatActivity() {
     companion object {
@@ -38,7 +40,9 @@ class ChatDetailsActivity : AppCompatActivity() {
         fun navigate(activity: AppCompatActivity, transitionImage: View, obj: Friend) {
             val intent = Intent(activity, ChatDetailsActivity::class.java)
             intent.putExtra(KEY_FRIEND, obj)
-            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, transitionImage, KEY_FRIEND)
+            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, transitionImage,
+                KEY_FRIEND
+            )
             ActivityCompat.startActivity(activity, intent, options.toBundle())
         }
     }
@@ -74,7 +78,9 @@ class ChatDetailsActivity : AppCompatActivity() {
         set = SettingApi(this)
         fAuth = FirebaseAuth.getInstance()
 
-        ViewCompat.setTransitionName(parent_view!!, KEY_FRIEND)
+        ViewCompat.setTransitionName(parent_view!!,
+            KEY_FRIEND
+        )
 
         val intent = intent
         friend = intent.extras!!.getSerializable(KEY_FRIEND) as Friend

@@ -1,7 +1,7 @@
-package com.futsell.app
+package com.futsell.app.util
 
 import android.util.Log
-import com.futsell.app.Const.Companion.LOG_TAG
+import com.futsell.app.util.Const.Companion.LOG_TAG
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 

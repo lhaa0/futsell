@@ -1,21 +1,21 @@
-package com.futsell.app
+package com.futsell.app.util
 
 import android.content.Context
-import com.futsell.app.Const.Companion
-import com.futsell.app.Const.Companion.NODE_ID
-import com.futsell.app.Const.Companion.NODE_IS_READ
-import com.futsell.app.Const.Companion.NODE_NAME
-import com.futsell.app.Const.Companion.NODE_PHOTO
-import com.futsell.app.Const.Companion.NODE_RECEIVER_ID
-import com.futsell.app.Const.Companion.NODE_RECEIVER_NAME
-import com.futsell.app.Const.Companion.NODE_RECEIVER_PHOTO
-import com.futsell.app.Const.Companion.NODE_SENDER_ID
-import com.futsell.app.Const.Companion.NODE_SENDER_NAME
-import com.futsell.app.Const.Companion.NODE_SENDER_PHOTO
-import com.futsell.app.Const.Companion.NODE_TEXT
-import com.futsell.app.Const.Companion.NODE_TIMESTAMP
+import com.futsell.app.model.Friend
+import com.futsell.app.util.Const.Companion.NODE_ID
+import com.futsell.app.util.Const.Companion.NODE_IS_READ
+import com.futsell.app.util.Const.Companion.NODE_NAME
+import com.futsell.app.util.Const.Companion.NODE_PHOTO
+import com.futsell.app.util.Const.Companion.NODE_RECEIVER_ID
+import com.futsell.app.util.Const.Companion.NODE_RECEIVER_NAME
+import com.futsell.app.util.Const.Companion.NODE_RECEIVER_PHOTO
+import com.futsell.app.util.Const.Companion.NODE_SENDER_ID
+import com.futsell.app.util.Const.Companion.NODE_SENDER_NAME
+import com.futsell.app.util.Const.Companion.NODE_SENDER_PHOTO
+import com.futsell.app.util.Const.Companion.NODE_TEXT
+import com.futsell.app.util.Const.Companion.NODE_TIMESTAMP
 import com.google.firebase.database.DataSnapshot
-import java.util.ArrayList
+import java.util.*
 
 class ParseFirebaseData {
 

@@ -1,7 +1,6 @@
-package com.futsell.app
+package com.futsell.app.util
 
 import android.util.Log
-import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.FirebaseMessagingService
 

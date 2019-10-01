@@ -1,4 +1,4 @@
-package com.futsell.app
+package com.futsell.app.adapter
 
 import android.content.Context
 import android.graphics.Color
@@ -12,6 +12,9 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
+import com.futsell.app.R
+import com.futsell.app.util.ChatMessage
+import com.futsell.app.util.SettingApi
 
 class ChatDetailListAdapter(private val mContext: Context, private val mMessages: MutableList<ChatMessage>, val uid : String) : BaseAdapter() {
     internal var set: SettingApi

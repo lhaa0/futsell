@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.futsell.app">
+        package="com.futsell.app">
 
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
             android:allowBackup="true"
@@ -14,8 +14,11 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true">
-        <activity android:name=".activity.OrderActivity">
-        </activity>
+        <activity
+                android:name=".activity.UserActivity"
+                android:label="@string/title_activity_user"
+                android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".activity.OrderActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -26,54 +29,58 @@
         -->
         <meta-data
                 android:name="com.google.android.geo.API_KEY"
-                android:value="@string/google_maps_key"/> <!-- <activity -->
+                android:value="@string/google_maps_key" /> <!-- <activity -->
         <!-- android:name=".MapsActivity" -->
         <!-- android:label="@string/title_activity_maps"> -->
         <!-- </activity> -->
-        <activity android:name=".activity.LoginActivity" android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity
+                android:name=".activity.LoginActivity"
+                android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".activity.ProfileActivity" />
-        <activity android:name=".activity.TransactionActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".fragment.ProfileFragment" />
+        <activity android:name=".fragment.TransactionFragment" />
 
         <service
-                android:name="FirebaseMsgServices"
+                android:name=".util.FirebaseMsgServices"
                 android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
         <service
-                android:name="FirebaseInstncIDServices"
+                android:name=".util.FirebaseInstncIDServices"
                 android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-        <activity android:name=".ChatDetailsActivity"/>
-        <activity android:name=".ChatsActivity"/>
-        <service
-                android:name=".NotificationService"
-                android:label="Poll Messages"
-                android:permission="android.permission.BIND_JOB_SERVICE"
-                android:exported="true">
 
-        </service>
+        <activity android:name=".activity.ChatDetailsActivity" />
+        <activity android:name=".activity.ChatsActivity" />
+        <activity
+                android:name=".activity.RegisterActivity"
+                android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
         <service
-                android:name=".FirebaseMsgServices"
+                android:name=".util.NotificationService"
+                android:exported="true"
+                android:label="Poll Messages"
+                android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service
+                android:name=".util.FirebaseMsgServices"
                 android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
         <service
-                android:name=".FirebaseInstncIDServices"
+                android:name=".util.FirebaseInstncIDServices"
                 android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />

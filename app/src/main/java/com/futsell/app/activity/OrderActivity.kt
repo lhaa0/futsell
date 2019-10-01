@@ -1,17 +1,15 @@
 package com.futsell.app.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View.GONE
-import android.view.View.VISIBLE
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.futsell.app.ChatDetailsActivity
-import com.futsell.app.Friend
 import com.futsell.app.R
 import com.futsell.app.adapter.OrderAdapter
+import com.futsell.app.model.Friend
 import com.futsell.app.model.ModelClock
 import com.futsell.app.model.ModelFutsal
 import com.google.firebase.auth.FirebaseAuth
@@ -23,7 +21,6 @@ import kotlinx.android.synthetic.main.activity_order.*
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
 
 class OrderActivity : AppCompatActivity() {
 
@@ -46,7 +43,11 @@ class OrderActivity : AppCompatActivity() {
         txtTgl.text = SimpleDateFormat("dd/MM/yyyy").format(date)
 
         calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
-            txtTgl.text = "$dayOfMonth/${month+1}/$year"
+            val cal = Calendar.getInstance()
+            cal.set(Calendar.YEAR, year)
+            cal.set(Calendar.MONTH, month)
+            cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+            txtTgl.text = SimpleDateFormat("dd/MM/yyyy").format(cal.time)
         }
 
         txtLayout.setOnClickListener {
@@ -110,7 +111,7 @@ class OrderActivity : AppCompatActivity() {
         }
         val fAuth = FirebaseAuth.getInstance()
 //        val dbRef = FirebaseDatabase.getInstance().getReference("dataOrder/${fAuth.currentUser!!.uid}|${data.uid_admin}")
-        val dbRef = FirebaseDatabase.getInstance().getReference("dataOrder/${fAuth.currentUser!!.uid}|${data.id_futsal}/")
+        FirebaseDatabase.getInstance().getReference("dataOrder/${fAuth.currentUser!!.uid}|${data.id_futsal}/")
             .addListenerForSingleValueEvent(object : ValueEventListener{
                 override fun onDataChange(p0: DataSnapshot) {
                     var key = 1
@@ -128,13 +129,17 @@ class OrderActivity : AppCompatActivity() {
                     insert.push()
 
                     ChatDetailsActivity.navigate(this@OrderActivity, findViewById(R.id.rcOrder),
-                        Friend(data.uid_admin.toString(), data.nama_futsal.toString() , "hhhhh")
+                        Friend(
+                            data.uid_admin.toString(),
+                            data.nama_futsal.toString(),
+                            "hhhhh"
+                        )
                     )
                     finish()
                 }
 
                 override fun onCancelled(p0: DatabaseError) {
-
+                    Toast.makeText(this@OrderActivity, "Gagal, Silahkan coba lagi", Toast.LENGTH_LONG).show()
                 }
 
             })

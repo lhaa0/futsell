@@ -1,4 +1,4 @@
-package com.futsell.app
+package com.futsell.app.activity
 
 import android.app.job.JobInfo
 import android.app.job.JobScheduler
@@ -15,7 +15,9 @@ import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.futsell.app.activity.LoginActivity
+import com.futsell.app.R
+import com.futsell.app.adapter.ChatListAdapter
+import com.futsell.app.util.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.toolbar.*
@@ -83,10 +85,15 @@ class ChatsActivity : AppCompatActivity() {
                 Log.d(Const.LOG_TAG, "Data changed from fragment")
                 if (dataSnapshot.value != null)
                 // TODO: 25-05-2017 if number of items is 0 then show something else
-                    mAdapter = ChatListAdapter(this@ChatsActivity, pfbd.getAllLastMessages(dataSnapshot, fAuth.currentUser!!.uid), fAuth.currentUser!!.uid)
+                    mAdapter = ChatListAdapter(
+                        this@ChatsActivity,
+                        pfbd.getAllLastMessages(dataSnapshot, fAuth.currentUser!!.uid),
+                        fAuth.currentUser!!.uid
+                    )
                 recyclerView.adapter = mAdapter
 
-                mAdapter?.setOnItemClickListener(object : ChatListAdapter.OnItemClickListener {
+                mAdapter?.setOnItemClickListener(object :
+                    ChatListAdapter.OnItemClickListener {
                     override fun onItemClick(view: View, obj: ChatMessage, position: Int) {
                         if (obj.receiver.id.equals(fAuth.currentUser!!.uid))
                             ChatDetailsActivity.navigate(

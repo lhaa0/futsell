@@ -1,13 +1,15 @@
 package com.futsell.app.activity
 
+import android.Manifest
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.util.Log.d
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.futsell.app.MainActivity
 import com.futsell.app.R
+import com.futsell.app.util.PrefsHelper
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -16,6 +18,11 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.livinglifetechway.quickpermissions_kotlin.runWithPermissions
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
@@ -67,6 +74,10 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
+        tv_signup.setOnClickListener {
+            startActivity(Intent(this, RegisterActivity::class.java))
+        }
+
     }
 
 
@@ -98,14 +109,32 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateUI(user: FirebaseUser?) {
-        if (user != null)
-            Toast.makeText(
-                this,
-                "Login Berhasil Welcome ${user.displayName}",
-                Toast.LENGTH_SHORT
-            ).show()
-        startActivity(Intent(this, MainActivity::class.java))
+    private fun updateUI(user: FirebaseUser?) = runWithPermissions(
+        Manifest.permission.ACCESS_COARSE_LOCATION,
+        Manifest.permission.ACCESS_FINE_LOCATION
+    ) {
+        if (user != null) {
+            FirebaseDatabase.getInstance().getReference("user/${user.uid}")
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(p0: DataSnapshot) {
+                        PrefsHelper(this@LoginActivity).savePref(
+                            p0.child("name").value.toString(),
+                            PrefsHelper.FULLNAME
+                        )
+                        PrefsHelper(this@LoginActivity).savePref(
+                            p0.child("email").value.toString(),
+                            PrefsHelper.EMAIL
+                        )
+                        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+
+                    }
+
+                    override fun onCancelled(p0: DatabaseError) {
+
+                    }
+
+                })
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -127,6 +156,20 @@ class LoginActivity : AppCompatActivity() {
         if (user != null) {
             updateUI(user)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val user = fAuth.currentUser
+        if (user != null)
+            updateUI(user)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        val user = fAuth.currentUser
+        if (user != null)
+            finish()
     }
 
 }

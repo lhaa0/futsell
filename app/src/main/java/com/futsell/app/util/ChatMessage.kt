@@ -1,4 +1,6 @@
-package com.futsell.app
+package com.futsell.app.util
+
+import com.futsell.app.model.Friend
 
 
 class ChatMessage(var text: String?, var timestamp: String?, var friendId: String?, var friendName: String?, var friendPhoto: String?, var senderId: String?, var senderName: String?, var senderPhoto: String?, var isRead: Boolean?) {

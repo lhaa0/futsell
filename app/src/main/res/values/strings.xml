@@ -5,4 +5,7 @@
     <string name="error_authetication_failed">Authentication failed.</string>
     <string name="error_could_not_connect">Could not connect</string>
     <string name="error_login_failed">Login failed</string>
+    <string name="title_activity_user">UserActivity</string>
+    <string name="tab_text_1">As User</string>
+    <string name="tab_text_2">As Admin</string>
 </resources>
